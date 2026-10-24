@@ -18,23 +18,21 @@ public:
 	float fZ;
 
 	CVector3()
-	{
-		fX = fY = fZ = 0.0f;
-	}
+		: fX(0.0f), fY(0.0f), fZ(0.0f)
+	{}
 
 	CVector3(float _fX, float _fY, float _fZ)
+		: fX(_fX), fY(_fY), fZ(_fZ)
+	{}
+
+	bool IsEmpty() const noexcept
 	{
-		fX = _fX; fY = _fY; fZ = _fZ;
+		return (fX == 0.0f && fY == 0.0f && fZ == 0.0f);
 	}
 
-	bool IsEmpty() const
+	float Length() const noexcept
 	{
-		return (fX == 0 && fY == 0 && fZ == 0);
-	}
-
-	float Length() const
-	{
-		return sqrt((fX * fX) + (fY * fY) + (fZ * fZ));
+		return sqrtf((fX * fX) + (fY * fY) + (fZ * fZ));
 	}
 
 	CVector3 operator+ (const CVector3& vecRight) const
@@ -82,28 +80,28 @@ public:
 		return CVector3(-fX, -fY, -fZ);
 	}
 
-	void operator += (float fRight)
+	void operator += (float fRight) noexcept
 	{
 		fX += fRight;
 		fY += fRight;
 		fZ += fRight;
 	}
 
-	void operator -= (float fRight)
+	void operator -= (float fRight) noexcept
 	{
 		fX -= fRight;
 		fY -= fRight;
 		fZ -= fRight;
 	}
 
-	void operator *= (float fRight)
+	void operator *= (float fRight) noexcept
 	{
 		fX *= fRight;
 		fY *= fRight;
 		fZ *= fRight;
 	}
 
-	void operator /= (float fRight)
+	void operator /= (float fRight) noexcept
 	{
 		fX /= fRight;
 		fY /= fRight;
